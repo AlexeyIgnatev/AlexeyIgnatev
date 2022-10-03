@@ -1,6 +1,6 @@
 import random
 import typing as tp
-from math import ceil, sqrt
+from math import ceil, sqrt, gcd as m_gcd
 
 
 def is_prime(n: int) -> bool:
@@ -15,16 +15,7 @@ def is_prime(n: int) -> bool:
 
 
 def gcd(a: int, b: int) -> int:
-    """
-    Euclid's algorithm for determining the greatest common divisor.
-
-    >>> gcd(12, 15)
-    3
-    >>> gcd(3, 7)
-    1
-    """
-    # PUT YOUR CODE HERE
-    pass
+    return m_gcd(a, b)
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
@@ -45,10 +36,10 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
     elif p == q:
         raise ValueError("p and q cannot be equal")
 
-    # n = pq
+    n = pq
     # PUT YOUR CODE HERE
 
-    # phi = (p-1)(q-1)
+    phi = (p-1)(q-1)
     # PUT YOUR CODE HERE
 
     # Choose an integer e such that e and phi(n) are coprime
