@@ -1,20 +1,17 @@
 import random
 import typing as tp
+from math import ceil, sqrt
 
 
 def is_prime(n: int) -> bool:
-    """
-    Tests to see if a number is prime.
+    if n == 1:
+        return False
 
-    >>> is_prime(2)
-    True
-    >>> is_prime(11)
-    True
-    >>> is_prime(8)
-    False
-    """
-    # PUT YOUR CODE HERE
-    pass
+    for i in range(2, ceil(sqrt(n)) + 1):
+        if n % i == 0 and i != n:
+            return False
+
+    return True
 
 
 def gcd(a: int, b: int) -> int:
