@@ -1,13 +1,12 @@
 import random
 import typing as tp
-from math import ceil, sqrt, gcd as m_gcd
 
 
 def is_prime(n: int) -> bool:
     if n == 1:
         return False
 
-    for i in range(2, ceil(sqrt(n)) + 1):
+    for i in range(2, int(n ** 0.5) + 1):
         if n % i == 0 and i != n:
             return False
 
@@ -15,7 +14,10 @@ def is_prime(n: int) -> bool:
 
 
 def gcd(a: int, b: int) -> int:
-    return m_gcd(a, b)
+    if b == 0:
+        return abs(a)
+    else:
+        return gcd(b, a % b)
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
