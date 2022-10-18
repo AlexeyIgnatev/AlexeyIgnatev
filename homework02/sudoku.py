@@ -33,7 +33,7 @@ def display(grid: tp.List[tp.List[str]]) -> None:
 
 
 def group(values: tp.List[T], n: int) -> tp.List[tp.List[T]]:
-    return [values[i - n : i] for i in range(n, len(values) + 1, n)]
+    return [values[i - n: i] for i in range(n, len(values) + 1, n)]
 
 
 def get_row(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str]:
