@@ -115,10 +115,10 @@ def check_solution(solution: tp.List[tp.List[str]]) -> bool:
             row = get_row(solution, p)
             block = get_block(solution, p)
             if not (
-                    len(set(col)) == len(set(row)) == len(set(block)) == len(solution)
-                    and "." not in col
-                    and "." not in row
-                    and "." not in block
+                len(set(col)) == len(set(row)) == len(set(block)) == len(solution)
+                and "." not in col
+                and "." not in row
+                and "." not in block
             ):
                 return False
     return True
