@@ -6,7 +6,6 @@ T = tp.TypeVar("T")
 
 
 def read_sudoku(path: tp.Union[str, pathlib.Path]) -> tp.List[tp.List[str]]:
-    """ Прочитать Судоку из указанного файла """
     path = pathlib.Path(path)
     with path.open() as f:
         puzzle = f.read()
@@ -20,7 +19,6 @@ def create_grid(puzzle: str) -> tp.List[tp.List[str]]:
 
 
 def display(grid: tp.List[tp.List[str]]) -> None:
-    """Вывод Судоку """
     width = 2
     line = "+".join(["-" * (width * 3)] * 3)
     for row in range(9):
@@ -35,7 +33,7 @@ def display(grid: tp.List[tp.List[str]]) -> None:
 
 
 def group(values: tp.List[T], n: int) -> tp.List[tp.List[T]]:
-    return [values[i - n:i] for i in range(n, len(values) + 1, n)]
+    return [values[i - n : i] for i in range(n, len(values) + 1, n)]
 
 
 def get_row(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str]:
@@ -116,8 +114,12 @@ def check_solution(solution: tp.List[tp.List[str]]) -> bool:
             col = get_col(solution, p)
             row = get_row(solution, p)
             block = get_block(solution, p)
-            if not (len(set(col)) == len(set(row)) == len(set(block)) == len(
-                    solution) and "." not in col and "." not in row and "." not in block):
+            if not (
+                    len(set(col)) == len(set(row)) == len(set(block)) == len(solution)
+                    and "." not in col
+                    and "." not in row
+                    and "." not in block
+            ):
                 return False
     return True
 
