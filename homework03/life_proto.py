@@ -28,6 +28,7 @@ class GameOfLife:
 
         # Скорость протекания игры
         self.speed = speed
+        self.grid = [[]]
 
     def draw_lines(self) -> None:
         for x in range(0, self.width, self.cell_size):

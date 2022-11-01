@@ -92,7 +92,7 @@ class GameOfLife:
 
     @property
     def is_max_generations_exceeded(self) -> bool:
-        return self.generations >= self.max_generations
+        return self.generations >= (self.max_generations or float("inf"))
 
     @property
     def is_changing(self) -> bool:
@@ -109,11 +109,12 @@ class GameOfLife:
             height = len(grid)
             width = len(grid[0].strip())
 
+            grid1 = []
             for i in range(len(grid)):
-                grid[i] = list(map(int, [*(grid[i].strip())]))
+                grid1.append(list(map(int, [*(grid[i].strip())])))
 
         life = GameOfLife((height, width))
-        life.curr_generation = grid
+        life.curr_generation = grid1
         return life
 
     def save(self, filename: pathlib.Path) -> None:
