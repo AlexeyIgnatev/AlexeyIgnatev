@@ -30,8 +30,10 @@ class GameOfLife:
         self.generations = 1
 
     def create_grid(self, randomize: bool = False) -> Grid:
-        return [[random.randrange(2) if randomize else 0 for _ in range(self.cell_width)] for _ in
-                range(self.cell_height)]
+        return [
+            [random.randrange(2) if randomize else 0 for _ in range(self.cell_width)]
+            for _ in range(self.cell_height)
+        ]
 
     def get_neighbours(self, cell: Cell) -> Cells:
         n = []
