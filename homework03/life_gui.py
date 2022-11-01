@@ -1,6 +1,5 @@
 import pygame
 from life import GameOfLife
-from pygame.locals import QUIT
 from ui import UI
 
 
@@ -44,11 +43,7 @@ class GUI(UI):
         pygame.display.set_caption("Game of Life")
         self.screen.fill(pygame.Color("white"))
 
-        running = True
-        while running and self.life.is_changing and not self.life.is_max_generations_exceeded:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    running = False
+        while self.life.is_changing and not self.life.is_max_generations_exceeded:
 
             self.draw_grid()
             self.draw_lines()

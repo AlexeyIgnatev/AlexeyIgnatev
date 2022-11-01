@@ -2,7 +2,6 @@ import random
 import typing as tp
 
 import pygame
-from pygame.locals import *
 
 Cell = tp.Tuple[int, int]
 Cells = tp.List[int]
@@ -28,7 +27,7 @@ class GameOfLife:
 
         # Скорость протекания игры
         self.speed = speed
-        self.grid = [[]]
+        self.grid: Grid = [[]]
 
     def draw_lines(self) -> None:
         for x in range(0, self.width, self.cell_size):
@@ -47,9 +46,6 @@ class GameOfLife:
 
         running = True
         while running:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    running = False
             self.draw_lines()
 
             # Отрисовка списка клеток
