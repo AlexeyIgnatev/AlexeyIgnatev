@@ -4,10 +4,31 @@ import typing as tp
 
 
 def repo_find(workdir: tp.Union[str, pathlib.Path] = ".") -> pathlib.Path:
-    # PUT YOUR CODE HERE
-    ...
+    root = os.environ["GIT_DIR"]
+
+    path = str(workdir.stem)
+    if root not in path:
+        raise Exception("Not a git repository")
+    return pathlib.Path(path.split(os.sep)[0]) / root
 
 
 def repo_create(workdir: tp.Union[str, pathlib.Path]) -> pathlib.Path:
-    # PUT YOUR CODE HERE
-    ...
+    root = os.environ["GIT_DIR"]
+    if workdir.is_file():
+        raise Exception(f"{workdir.name} is not a directory")
+
+    os.makedirs(workdir / root / "refs" / "tags")
+    os.makedirs(workdir / root / "refs" / "heads")
+    os.makedirs(workdir / root / "objects")
+
+    with open(workdir / root / "HEAD", "w") as f:
+        f.write("ref: refs/heads/master\n")
+
+    with open(workdir / root / "config", "w") as f:
+        f.write(
+            "[core]\n\trepositoryformatversion = 0\n\tfilemode = true\n\tbare = false\n\tlogallrefupdates = false\n")
+
+    with open(workdir / root / "description", "w") as f:
+        f.write("Unnamed pyvcs repository.\n")
+
+    return pathlib.Path(workdir / root)
