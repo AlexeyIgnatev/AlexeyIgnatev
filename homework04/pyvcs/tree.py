@@ -7,7 +7,7 @@ from pyvcs.objects import hash_object
 
 
 def write_tree(gitdir: pathlib.Path, index: tp.List[GitIndexEntry], dirname: str = "") -> str:
-    tree = dict()
+    tree: tp.Dict[str, tp.List[GitIndexEntry]] = dict()
     current = bytes()
 
     for i in index:
@@ -25,7 +25,7 @@ def write_tree(gitdir: pathlib.Path, index: tp.List[GitIndexEntry], dirname: str
             tree[n[0]].append(i)
     for i in list(tree.keys())[::-1]:
         l = tree[i]
-        res = write_tree(gitdir, l, dirname + "/" + i if dirname != "" else i)
+        res = write_tree(gitdir, l, str(dirname + "/" + i) if dirname != "" else str(i))
         current = ("40000 " + i).encode() + b"\x00" + bytes.fromhex(res) + current
 
     return hash_object(current, "tree", True)

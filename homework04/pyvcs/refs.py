@@ -23,7 +23,7 @@ def ref_resolve(gitdir: pathlib.Path, ref_name: str) -> str:
     ref_path = gitdir / ref_name
 
     if not ref_path.exists():
-        return None
+        return ""
 
     with ref_path.open(mode="r") as f:
         content = f.read()

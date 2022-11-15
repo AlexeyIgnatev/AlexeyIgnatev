@@ -52,7 +52,7 @@ def find_object(obj_name: str, gitdir: pathlib.Path) -> str:
     if obj_name[2:] in gitdir.parts[-1]:
         return str(gitdir.parts[-2] + str(gitdir.parts[-1]))
     else:
-        return None
+        return ""
 
 
 def read_object(sha: str, gitdir: pathlib.Path) -> tp.Tuple[str, bytes]:
@@ -61,9 +61,9 @@ def read_object(sha: str, gitdir: pathlib.Path) -> tp.Tuple[str, bytes]:
         obj_data = zlib.decompress(f.read())
     header = obj_data[: obj_data.find(b"\x00")]
     fmt = header[: header.find(b" ")]
-    fmt = fmt.decode("ascii")
+    fmt1 = fmt.decode("ascii")
     content = obj_data[len(header) + 1 :]
-    return (fmt, content)
+    return (fmt1, content)
 
 
 def read_tree(data: bytes) -> tp.List[tp.Tuple[int, str, str]]:
