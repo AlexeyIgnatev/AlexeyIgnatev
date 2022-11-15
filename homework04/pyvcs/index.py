@@ -37,7 +37,7 @@ class GitIndexEntry(tp.NamedTuple):
                 self.mode,
                 self.uid,
                 self.gid,
-                self.size
+                self.size,
             )
             + self.sha1
             + struct.pack(">H", self.flags)
