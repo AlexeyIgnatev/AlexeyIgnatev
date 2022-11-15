@@ -25,18 +25,35 @@ class GitIndexEntry(tp.NamedTuple):
     name: str
 
     def pack(self) -> bytes:
-        pack = struct.pack(">IIIIIIIIII", self.ctime_s, self.ctime_n, self.mtime_s, self.mtime_n, self.dev, self.ino,
-                           self.mode,
-                           self.uid, self.gid, self.size) + self.sha1 + struct.pack(">H",
-                                                                                    self.flags) + self.name.encode() + b"\x00\x00\x00"
+        pack = (
+                struct.pack(
+                    ">IIIIIIIIII",
+                    self.ctime_s,
+                    self.ctime_n,
+                    self.mtime_s,
+                    self.mtime_n,
+                    self.dev,
+                    self.ino,
+                    self.mode,
+                    self.uid,
+                    self.gid,
+                    self.size
+                )
+                + self.sha1
+                + struct.pack(">H", self.flags)
+                + self.name.encode()
+                + b"\x00\x00\x00"
+        )
         return pack
 
     @staticmethod
     def unpack(data: bytes) -> "GitIndexEntry":
-        ctime_s, ctime_n, mtime_s, mtime_n, dev, ino, mode, uid, gid, size = struct.unpack(">IIIIIIIIII", data[:40])
+        ctime_s, ctime_n, mtime_s, mtime_n, dev, ino, mode, uid, gid, size = struct.unpack(
+            ">IIIIIIIIII", data[:40]
+        )
         sha1 = data[40:60]
         flags = struct.unpack(">H", data[60:62])[0]
-        name = data[62:data[62:].index(b"\x00\x00\x00") + 62].decode("ascii")
+        name = data[62: data[62:].index(b"\x00\x00\x00") + 62].decode("ascii")
         return GitIndexEntry(
             ctime_s, ctime_n, mtime_s, mtime_n, dev, ino, mode, uid, gid, size, sha1, flags, name
         )
@@ -100,7 +117,7 @@ def update_index(gitdir: pathlib.Path, paths: tp.List[pathlib.Path], write: bool
             size=stats.st_size,
             sha1=bytes.fromhex(hash),
             flags=0,
-            name=str(path).replace("\\", "/")
+            name=str(path).replace("\\", "/"),
         )
 
         objects.append(e)

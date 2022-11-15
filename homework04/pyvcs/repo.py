@@ -32,7 +32,8 @@ def repo_create(workdir: tp.Union[str, pathlib.Path]) -> pathlib.Path:
 
     with open(workdir / root / "config", "w") as f:
         f.write(
-            "[core]\n\trepositoryformatversion = 0\n\tfilemode = true\n\tbare = false\n\tlogallrefupdates = false\n")
+            "[core]\n\trepositoryformatversion = 0\n\tfilemode = true\n\tbare = false\n\tlogallrefupdates = false\n"
+        )
 
     with open(workdir / root / "description", "w") as f:
         f.write("Unnamed pyvcs repository.\n")

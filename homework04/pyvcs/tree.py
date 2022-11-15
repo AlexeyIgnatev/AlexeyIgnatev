@@ -12,7 +12,7 @@ def write_tree(gitdir: pathlib.Path, index: tp.List[GitIndexEntry], dirname: str
 
     for i in index:
         if i.name.find(dirname) == 0 and dirname != "":
-            n = i.name[len(dirname) + 1:].split("/")
+            n = i.name[len(dirname) + 1 :].split("/")
         else:
             n = i.name.split("/")
         if n[0] == dirname:
@@ -32,11 +32,11 @@ def write_tree(gitdir: pathlib.Path, index: tp.List[GitIndexEntry], dirname: str
 
 
 def commit_tree(
-        gitdir: pathlib.Path,
-        tree: str,
-        message: str,
-        parent: tp.Optional[str] = None,
-        author: tp.Optional[str] = None,
+    gitdir: pathlib.Path,
+    tree: str,
+    message: str,
+    parent: tp.Optional[str] = None,
+    author: tp.Optional[str] = None,
 ) -> str:
     timestamp = int(time.mktime(time.localtime()))
     offset = -time.timezone
