@@ -8,7 +8,7 @@ def repo_find(workdir: tp.Union[str, pathlib.Path] = ".") -> pathlib.Path:
         root = os.environ["GIT_DIR"]
     except:
         root = ".git"
-    workdir = str(pathlib.Path(workdir) / root).split(root)[0] + os.sep + root
+    workdir = pathlib.Path(str(pathlib.Path(workdir) / root).split(root)[0]) / root
     if not os.path.exists(workdir):
         raise Exception("Not a git repository")
     return pathlib.Path(workdir)
