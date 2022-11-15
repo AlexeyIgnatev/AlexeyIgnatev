@@ -3,14 +3,12 @@ import stat
 import unittest
 from unittest.mock import patch
 
-from pyfakefs.fake_filesystem_unittest import TestCase
-
 import pyvcs
+from pyfakefs.fake_filesystem_unittest import TestCase
 from pyvcs.porcelain import add, checkout, commit
 from pyvcs.repo import repo_create
 
 
-@unittest.skipIf(pyvcs.__version_info__ < (0, 8, 0), "Нужна версия пакета 0.8.0 и выше")
 class CheckoutTestCase(TestCase):
     def setUp(self):
         self.setUpPyfakefs()
