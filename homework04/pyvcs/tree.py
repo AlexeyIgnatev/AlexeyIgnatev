@@ -23,10 +23,10 @@ def write_tree(gitdir: pathlib.Path, index: tp.List[GitIndexEntry], dirname: str
             if n[0] not in tree.keys():
                 tree[n[0]] = []
             tree[n[0]].append(i)
-    for i in list(tree.keys())[::-1]:
-        l = tree[i]
-        res = write_tree(gitdir, l, str(dirname + "/" + i) if dirname != "" else str(i))
-        current = ("40000 " + i).encode() + b"\x00" + bytes.fromhex(res) + current
+    for j in list(tree.keys())[::-1]:
+        l = tree[j]
+        res = write_tree(gitdir, l, str(dirname + "/" + j) if dirname != "" else str(j))
+        current = ("40000 " + j).encode() + b"\x00" + bytes.fromhex(res) + current
 
     return hash_object(current, "tree", True)
 
