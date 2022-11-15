@@ -12,7 +12,6 @@ from pyvcs.repo import repo_create
 from pyvcs.tree import commit_tree, write_tree
 
 
-@unittest.skipIf(pyvcs.__version_info__ < (0, 5, 0), "Нужна версия пакета 0.5.0 и выше")
 class WriteTreeTestCase(TestCase):
     def setUp(self):
         self.setUpPyfakefs()
@@ -54,7 +53,6 @@ class WriteTreeTestCase(TestCase):
         self.assertTrue(numbers_tree_obj.exists())
 
 
-@unittest.skipIf(pyvcs.__version_info__ < (0, 6, 0), "Нужна версия пакета 0.6.0 и выше")
 class CommitTreeTestCase(TestCase):
     def setUp(self):
         self.setUpPyfakefs()
