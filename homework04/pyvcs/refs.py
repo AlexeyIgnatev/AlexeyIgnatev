@@ -51,4 +51,4 @@ def get_ref(gitdir: pathlib.Path) -> str:
     ref_path = gitdir / ref
     with ref_path.open(mode="r") as f:
         content = f.read()
-    return content[content.find(" ") + 1:].strip()
+    return content[content.find(" ") + 1 :].strip()
