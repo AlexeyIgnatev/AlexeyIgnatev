@@ -48,11 +48,11 @@ def resolve_object(obj_name: str, gitdir: pathlib.Path) -> tp.List[str]:
     return objects
 
 
-def find_object(obj_name: str, gitdir: pathlib.Path) -> str:
+def find_object(obj_name: str, gitdir: pathlib.Path) -> tp.Optional[str]:
     if obj_name[2:] in gitdir.parts[-1]:
         return str(gitdir.parts[-2] + str(gitdir.parts[-1]))
     else:
-        return ""
+        return None
 
 
 def read_object(sha: str, gitdir: pathlib.Path) -> tp.Tuple[str, bytes]:

@@ -16,14 +16,14 @@ def symbolic_ref(gitdir: pathlib.Path, name: str, ref: str) -> None:
         f.write(f"ref: {ref}")
 
 
-def ref_resolve(gitdir: pathlib.Path, ref_name: str) -> str:
+def ref_resolve(gitdir: pathlib.Path, ref_name: str) -> tp.Optional[str]:
     if ref_name == "HEAD":
         ref_name = get_ref(gitdir)
 
     ref_path = gitdir / ref_name
 
     if not ref_path.exists():
-        return ""
+        return None
 
     with ref_path.open(mode="r") as f:
         content = f.read()
