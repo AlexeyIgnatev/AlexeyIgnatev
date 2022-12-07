@@ -62,4 +62,3 @@ def get_wall_execute(
         response += posts
         time.sleep(0.68)
     return json_normalize(response)
-
