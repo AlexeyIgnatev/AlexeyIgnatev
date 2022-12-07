@@ -1,6 +1,7 @@
 import textwrap
 import time
 import typing as tp
+from math import ceil
 from string import Template
 
 import pandas as pd
@@ -8,7 +9,6 @@ import requests
 from pandas import json_normalize
 from vkapi import config, session
 from vkapi.exceptions import APIError
-from math import ceil
 
 domainVK = config.VK_CONFIG["domain"]
 access_token = config.VK_CONFIG["access_token"]
